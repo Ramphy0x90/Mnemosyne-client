@@ -1,0 +1,4 @@
+.navbar {
+  background-color: var(--main-light);
+  border-bottom: 1px solid var(--main-color);
+}
