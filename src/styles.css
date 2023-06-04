@@ -1,3 +1,25 @@
+* {
+  box-sizing: border-box;
+  transition: all 120ms linear;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   background-color: var(--main-light-1);
+}
+
+a {
+  cursor: pointer;
+}
+
+.page-main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
