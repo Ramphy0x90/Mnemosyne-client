@@ -12,6 +12,10 @@ export class NavBarComponent implements OnInit {
       name: 'Login',
       route: 'log-in',
     },
+    {
+      name: 'Signup',
+      route: 'sign-up',
+    },
   ];
 
   constructor() {}
