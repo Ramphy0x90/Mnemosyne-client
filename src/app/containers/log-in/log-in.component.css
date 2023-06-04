@@ -1,0 +1,57 @@
+.login-container {
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 500px;
+  max-width: 850px;
+  margin-bottom: 75px;
+  border-radius: 5px;
+  background-color: var(--main-light);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+  flex: 0 0 150px;
+}
+
+.fields-container {
+  flex: 1 1 auto;
+  border-top: 1px solid var(--main-color);
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .form-container {
+    flex-direction: row;
+  }
+
+  .image-container {
+    flex: 0 0 300px;
+  }
+
+  .fields-container {
+    border-top: none;
+    border-left: 1px solid var(--main-color);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+}
