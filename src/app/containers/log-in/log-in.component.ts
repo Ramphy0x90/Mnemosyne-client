@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthLogin } from 'src/app/models/auth/auth-login';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,18 +9,22 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./log-in.component.css'],
 })
 export class LogInComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  authForm: AuthLogin = { username: null, password: null };
+  invalidCredentials: boolean = false;
 
-  ngOnInit(): void {
-    let test: AuthLogin = {
-      username: 'user_test',
-      password: 'password',
-    };
+  constructor(private authService: AuthService, private router: Router) {}
 
-    this.authService.logIn(test).subscribe({
+  ngOnInit(): void {}
+
+  onSubmit(): void {
+    this.authService.logIn(this.authForm).subscribe({
       next: (data) => {
+        this.invalidCredentials = false;
         console.log('CHECK');
         console.log(data);
+      },
+      error: (err) => {
+        this.invalidCredentials = true;
       },
     });
   }
