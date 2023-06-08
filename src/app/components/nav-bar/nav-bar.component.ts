@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthState, ShowNavOptionOn } from 'src/app/constants';
+import { Router } from '@angular/router';
+import { AuthState } from 'src/app/constants';
 import { NavComponent } from 'src/app/models/navigation/nav-component';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,21 +12,27 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent implements OnInit {
   userLogged: boolean = false;
 
-  navOptions: NavComponent[] = [
-    {
-      name: 'Login',
-      route: 'log-in',
-      visible: ShowNavOptionOn.USER_UNAUTHENTICATED,
-    },
-    {
-      name: 'Signup',
-      route: 'sign-up',
-      visible: ShowNavOptionOn.USER_UNAUTHENTICATED,
-    },
-  ];
+  navOptions: { [key in string]: NavComponent[] } = {
+    unauthenticated: [
+      {
+        name: 'Login',
+        route: 'log-in',
+      },
+      {
+        name: 'Signup',
+        route: 'sign-up',
+      },
+    ],
+    authenticated: [
+      {
+        name: 'Log out',
+        route: '',
+      },
+    ],
+  };
 
-  constructor(private authService: AuthService) {
-    authService.userAuthStatus.subscribe({
+  constructor(private authService: AuthService, private router: Router) {
+    this.authService.userAuthStatus.subscribe({
       next: (userAuthStatus: AuthState) => {
         this.userLogged = userAuthStatus == AuthState.AUTHENTICATED;
       },
@@ -34,23 +41,8 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  optionVisible(showOn: ShowNavOptionOn): boolean {
-    switch (showOn) {
-      case ShowNavOptionOn.USER_AUTHENTICATED:
-        return this.userLogged;
-
-      case ShowNavOptionOn.USER_UNAUTHENTICATED:
-        return this.userLogged;
-
-      case ShowNavOptionOn.USER_ADMIN:
-        return false;
-
-      default:
-        return false;
-    }
-  }
-
-  userAuthenticated(): boolean {
-    return this.userLogged;
+  logOut(): void {
+    this.authService.logOut();
+    this.router.navigate(['log-in']);
   }
 }

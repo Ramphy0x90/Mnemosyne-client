@@ -14,14 +14,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <ng-container *ngFor="let option of navOptions">
+        <!-- Unauthenticaed user nav options -->
+        <ng-container *ngIf="!userLogged">
           <a
-            *ngIf="optionVisible(option.visible)"
+            *ngFor="let option of navOptions['unauthenticated']"
             class="nav-link"
             data-bs-toggle="collapse"
             data-bs-target=".navbar-collapse.show"
             routerLinkActive="active"
             routerLink="{{ option.route }}"
+            >{{ option.name }}</a
+          >
+        </ng-container>
+
+        <!-- Authenticaed user nav options -->
+        <ng-container *ngIf="userLogged">
+          <a
+            *ngFor="let option of navOptions['authenticated']"
+            class="nav-link"
+            data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse.show"
+            routerLinkActive="active"
+            routerLink="{{ option.route }}"
+            (click)="option.name == 'Log out' ? logOut() : ''"
             >{{ option.name }}</a
           >
         </ng-container>

@@ -4,9 +4,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TestComponent } from './dev/test/test.component';
 
 @NgModule({
-  declarations: [LogInComponent, SignUpComponent],
+  declarations: [LogInComponent, SignUpComponent, TestComponent],
   imports: [CommonModule, RouterModule, FormsModule],
 })
 export class ContainersModule {}

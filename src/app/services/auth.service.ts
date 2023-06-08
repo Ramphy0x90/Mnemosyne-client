@@ -20,7 +20,9 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.recoverAuthStatus();
+  }
 
   /**
    * This function is used to autenticate an user
@@ -72,5 +74,20 @@ export class AuthService {
     }
 
     return AuthState.UNAUTHENTICATED;
+  }
+
+  /**
+   * Recover user auth status
+   */
+  recoverAuthStatus(): void {
+    this.userAuthStatus.emit(this.getUserAuthStatus());
+  }
+
+  /**
+   * Log out user
+   */
+  logOut(): void {
+    this.userAuthStatus.emit(AuthState.LOGGED_OUT);
+    window.sessionStorage.clear();
   }
 }

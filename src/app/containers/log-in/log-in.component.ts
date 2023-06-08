@@ -20,8 +20,8 @@ export class LogInComponent implements OnInit {
     this.authService.logIn(this.authForm).subscribe({
       next: (data) => {
         this.invalidCredentials = false;
-        console.log('CHECK');
-        console.log(data);
+        this.authService.storeUserToken(data);
+        this.router.navigate(['dev/test']);
       },
       error: (err) => {
         this.invalidCredentials = true;
