@@ -1,6 +1,7 @@
 export const enum AuthState {
   AUTHENTICATED,
   UNAUTHENTICATED,
+  SESSION_EXPIRED,
   LOGGED_OUT,
 }
 

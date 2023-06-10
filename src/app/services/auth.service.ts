@@ -6,6 +6,7 @@ import { AuthLogin } from '../models/auth/auth-login';
 import { AuthSignUp } from '../models/auth/auth-sign-up';
 import { AuthResponse } from '../models/auth/auth-response';
 import { AuthState } from '../constants';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,10 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private jwtHelperService: JwtHelperService
+  ) {
     this.recoverAuthStatus();
   }
 
@@ -69,8 +73,12 @@ export class AuthService {
    * @returns AuthState
    */
   getUserAuthStatus(): AuthState {
-    if (window.sessionStorage.getItem('token') !== null) {
+    const token = window.sessionStorage.getItem('token');
+
+    if (token !== null && !this.jwtHelperService.isTokenExpired(token)) {
       return AuthState.AUTHENTICATED;
+    } else if (this.jwtHelperService.isTokenExpired(token)) {
+      return AuthState.SESSION_EXPIRED;
     }
 
     return AuthState.UNAUTHENTICATED;
