@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthState } from 'src/app/constants';
+import { AuthState, NavOption, ShowNavOptionOn } from 'src/app/constants';
 import { NavComponent } from 'src/app/models/navigation/nav-component';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,23 +12,35 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent implements OnInit {
   userLogged: boolean = false;
 
-  navOptions: { [key in string]: NavComponent[] } = {
-    unauthenticated: [
+  NavOption = NavOption;
+  navOptions: { [key in ShowNavOptionOn]: NavComponent[] } = {
+    [ShowNavOptionOn.USER_UNAUTHENTICATED]: [
       {
+        id: NavOption.LOGIN,
         name: 'Login',
         route: 'log-in',
       },
       {
+        id: NavOption.SIGNUP,
         name: 'Signup',
         route: 'sign-up',
       },
     ],
-    authenticated: [
+    [ShowNavOptionOn.USER_AUTHENTICATED]: [
       {
+        id: NavOption.CLOUD,
+        name: 'Cloud',
+        route: 'cloud',
+      },
+      {
+        id: NavOption.LOGOUT,
         name: 'Log out',
-        route: '',
+        route: null,
       },
     ],
+    [ShowNavOptionOn.USER_ADMIN]: [],
+    [ShowNavOptionOn.ALL]: [],
+    [ShowNavOptionOn.TEST]: [],
   };
 
   constructor(private authService: AuthService, private router: Router) {

@@ -1,8 +1,8 @@
-import { ShowNavOptionOn } from 'src/app/constants';
+import { NavOption, ShowNavOptionOn } from 'src/app/constants';
 
 export interface NavComponent {
-  id?: string;
+  id: NavOption;
   name: string;
-  route: string;
+  route: string | null;
   accessMembers?: any[];
 }

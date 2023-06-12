@@ -17,7 +17,7 @@
         <!-- Unauthenticaed user nav options -->
         <ng-container *ngIf="!userLogged">
           <a
-            *ngFor="let option of navOptions['unauthenticated']"
+            *ngFor="let option of navOptions.USER_UNAUTHENTICATED"
             class="nav-link"
             data-bs-toggle="collapse"
             data-bs-target=".navbar-collapse.show"
@@ -30,13 +30,13 @@
         <!-- Authenticaed user nav options -->
         <ng-container *ngIf="userLogged">
           <a
-            *ngFor="let option of navOptions['authenticated']"
+            *ngFor="let option of navOptions.USER_AUTHENTICATED"
             class="nav-link"
             data-bs-toggle="collapse"
             data-bs-target=".navbar-collapse.show"
-            routerLinkActive="active"
             routerLink="{{ option.route }}"
-            (click)="option.name == 'Log out' ? logOut() : ''"
+            [routerLinkActive]="option.route ? 'active' : ''"
+            (click)="option.id == NavOption.LOGOUT ? logOut() : ''"
             >{{ option.name }}</a
           >
         </ng-container>
