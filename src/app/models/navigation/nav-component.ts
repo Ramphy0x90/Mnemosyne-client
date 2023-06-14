@@ -1,4 +1,4 @@
-import { NavOption, ShowNavOptionOn } from 'src/app/constants';
+import { NavOption } from 'src/app/constants';
 
 export interface NavComponent {
   id: NavOption;
