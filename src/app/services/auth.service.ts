@@ -61,11 +61,13 @@ export class AuthService {
    */
   storeUserToken(AuthResponse: AuthResponse): void {
     window.sessionStorage.clear();
+    window.sessionStorage.setItem('token', AuthResponse.token);
 
     this.userAuthStatus.emit(AuthState.AUTHENTICATED);
+  }
 
-    window.sessionStorage.setItem('token', AuthResponse.token);
-    // window.sessionStorage.setItem('user', JSON.stringify(user));
+  getUserToken(): string | null {
+    return window.sessionStorage.getItem('token');
   }
 
   /**

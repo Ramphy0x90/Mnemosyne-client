@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { AuthState } from '../constants';
@@ -7,7 +12,7 @@ import { AuthState } from '../constants';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard  {
+export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -18,7 +23,7 @@ export class AuthGuard  {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.authService.getUserAuthStatus() == AuthState.UNAUTHENTICATED) {
+    if (this.authService.getUserAuthStatus() != AuthState.AUTHENTICATED) {
       this.router.navigate(['log-in']);
       return false;
     }
