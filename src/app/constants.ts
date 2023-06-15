@@ -19,3 +19,10 @@ export enum NavOption {
   LOGOUT,
   CLOUD,
 }
+
+export enum CloudMenuAction {
+  UPLOAD,
+  CREATE,
+  DELETE,
+  SORT,
+}
