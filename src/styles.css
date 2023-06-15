@@ -43,6 +43,10 @@ button {
   border-radius: 5px;
 }
 
+i {
+  margin: 0 var(--space-3);
+}
+
 .text-error {
   color: var(--main-alert);
 }
