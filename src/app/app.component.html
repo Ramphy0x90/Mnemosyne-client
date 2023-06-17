@@ -1,9 +1,9 @@
 <div class="app-main-container">
-  <app-nav-bar></app-nav-bar>
-  <div
-    class="body"
-    [@fadeTransition]="outlet.isActivated ? outlet.activatedRoute : ''"
-  >
-    <router-outlet #outlet="outlet"></router-outlet>
-  </div>
+	<app-nav-bar></app-nav-bar>
+	<div
+		class="body"
+		[@fadeTransition]="outlet.isActivated ? outlet.activatedRoute : ''"
+	>
+		<router-outlet #outlet="outlet"></router-outlet>
+	</div>
 </div>
