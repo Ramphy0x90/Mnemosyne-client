@@ -1,8 +1,8 @@
 .navbar {
-  background-color: var(--main-light);
-  border-bottom: 1px solid var(--main-color);
+	background-color: var(--main-light);
+	border-bottom: 1px solid var(--main-color);
 }
 
 .navbar-nav {
-  margin-left: auto;
+	margin-left: auto;
 }

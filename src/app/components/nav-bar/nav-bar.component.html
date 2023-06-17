@@ -1,46 +1,46 @@
 <nav class="navbar navbar-expand-lg shadow-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Mnemosyne</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="bi bi-list"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <!-- Unauthenticaed user nav options -->
-        <ng-container *ngIf="!userLogged">
-          <a
-            *ngFor="let option of navOptions.USER_UNAUTHENTICATED"
-            class="nav-link"
-            data-bs-toggle="collapse"
-            data-bs-target=".navbar-collapse.show"
-            routerLinkActive="active"
-            routerLink="{{ option.route }}"
-            >{{ option.name }}</a
-          >
-        </ng-container>
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">Mnemosyne</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<i class="bi bi-list"></i>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<!-- Unauthenticaed user nav options -->
+				<ng-container *ngIf="!userLogged">
+					<a
+						*ngFor="let option of navOptions.USER_UNAUTHENTICATED"
+						class="nav-link"
+						data-bs-toggle="collapse"
+						data-bs-target=".navbar-collapse.show"
+						routerLinkActive="active"
+						routerLink="{{ option.route }}"
+						>{{ option.name }}</a
+					>
+				</ng-container>
 
-        <!-- Authenticaed user nav options -->
-        <ng-container *ngIf="userLogged">
-          <a
-            *ngFor="let option of navOptions.USER_AUTHENTICATED"
-            class="nav-link"
-            data-bs-toggle="collapse"
-            data-bs-target=".navbar-collapse.show"
-            routerLink="{{ option.route }}"
-            [routerLinkActive]="option.route ? 'active' : ''"
-            (click)="option.id == NavOption.LOGOUT ? logOut() : ''"
-            >{{ option.name }}</a
-          >
-        </ng-container>
-      </div>
-    </div>
-  </div>
+				<!-- Authenticaed user nav options -->
+				<ng-container *ngIf="userLogged">
+					<a
+						*ngFor="let option of navOptions.USER_AUTHENTICATED"
+						class="nav-link"
+						data-bs-toggle="collapse"
+						data-bs-target=".navbar-collapse.show"
+						routerLink="{{ option.route }}"
+						[routerLinkActive]="option.route ? 'active' : ''"
+						(click)="option.id == NavOption.LOGOUT ? logOut() : ''"
+						>{{ option.name }}</a
+					>
+				</ng-container>
+			</div>
+		</div>
+	</div>
 </nav>

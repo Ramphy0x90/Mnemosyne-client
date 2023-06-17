@@ -1,8 +1,8 @@
-import { CloudMenuAction } from 'src/app/constants';
+import { CloudMenuAction } from "src/app/constants";
 
 export interface MenuAction {
-  id: CloudMenuAction;
-  name: string;
-  icon?: string;
-  action: Function;
+	id: CloudMenuAction;
+	name: string;
+	icon?: string;
+	action: Function;
 }

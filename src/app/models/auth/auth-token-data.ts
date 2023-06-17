@@ -1,4 +1,4 @@
 export interface AuthTokenData {
-  username: string;
-  authorities: object[];
+	username: string;
+	authorities: object[];
 }
