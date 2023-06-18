@@ -1,52 +1,53 @@
 @font-face {
-  font-family: "San Francisco";
-  font-weight: 400;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+	font-family: "San Francisco";
+	font-weight: 400;
+	src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }
 
 * {
-  box-sizing: border-box;
-  transition: all 120ms linear;
+	box-sizing: border-box;
+	transition: all 120ms linear;
 }
 
 html,
 body {
-  margin: 0;
-  height: 100%;
-  font-family: "San Francisco", Helvetica, Arial, san-serif;
-  overflow: hidden;
+	margin: 0;
+	height: 100%;
+	font-family: "San Francisco", Helvetica, Arial, san-serif;
+	overflow: hidden;
 }
 
 body {
-  background-color: var(--main-light-1);
+	background-color: var(--main-light-1);
 }
 
 a {
-  cursor: pointer;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .page-main-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: var(--space-6);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: var(--space-6);
 }
 
 .active,
 .navbar-nav .nav-link.active,
 form label {
-  color: var(--main-color);
+	color: var(--main-color);
 }
 
 form input,
 button {
-  border-radius: 5px;
+	border-radius: 5px;
 }
 
 i {
-  margin: 0 var(--space-3);
+	margin: 0 var(--space-3);
 }
 
 .text-error {
-  color: var(--main-alert);
+	color: var(--main-alert);
 }
