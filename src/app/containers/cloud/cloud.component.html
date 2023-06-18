@@ -1,0 +1,29 @@
+<div class="cloud-container page-main-container">
+	<div class="files-container">
+		<div class="body">
+			<app-actions-menu (event)="eventHandler($event)"></app-actions-menu>
+			<ng-container *ngIf="files.length == 0; else filesGrid"
+				><div class="message">
+					There are no files uploaded
+					<i class="bi bi-emoji-frown"></i></div
+			></ng-container>
+
+			<ng-template #filesGrid>
+				<div class="files-grid">
+					<ng-container *ngFor="let file of files">
+						<app-item-card
+							[img]="file.ext"
+							[title]="file.name"
+							[showSelector]="showFileSelectors"
+							(selected)="selectFile($event, file)"
+						></app-item-card>
+					</ng-container>
+				</div>
+			</ng-template>
+		</div>
+	</div>
+
+	<div class="file-metadata-container">
+		<div class="body"></div>
+	</div>
+</div>
