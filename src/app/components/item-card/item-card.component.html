@@ -1,0 +1,13 @@
+<div class="item-card-main-container">
+	<div class="body" (click)="onSelect()">
+		<i *ngIf="showSelector && !isSelected" class="bi bi-circle check"></i>
+		<i
+			*ngIf="showSelector && isSelected"
+			class="bi bi-check-circle-fill check"
+		></i>
+		<div class="img-container">
+			<i [ngClass]="'bi bi-filetype-' + img"></i>
+		</div>
+		<div class="title-container">{{ title }}</div>
+	</div>
+</div>
