@@ -1,0 +1,77 @@
+<div class="actions-menu-main-container">
+	<ng-container *ngFor="let action of navOptions">
+		<button
+			*ngIf="action.id == CloudMenuAction.UPLOAD && !onEdit"
+			class="action-button"
+			data-bs-toggle="modal"
+			data-bs-target="#uploadModal"
+		>
+			<i [ngClass]="action.icon"></i> {{ action.name }}
+		</button>
+
+		<a
+			*ngIf="
+				(action.id != CloudMenuAction.UPLOAD &&
+					action.id == CloudMenuAction.EDIT &&
+					!onEdit) ||
+				(action.id == CloudMenuAction.DELETE && onEdit) ||
+				(action.id == CloudMenuAction.CANCEL && onEdit)
+			"
+			class="action-button"
+			(click)="action.action()"
+		>
+			<i [ngClass]="action.icon"></i> {{ action.name }}
+		</a>
+	</ng-container>
+</div>
+
+<div
+	#uploadModal
+	class="modal fade"
+	id="uploadModal"
+	tabindex="-1"
+	aria-labelledby="uploadModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="uploadModalLabel">Upload file</h5>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<input
+							type="file"
+							class="form-control"
+							id="file"
+							(change)="onFileSelected($event)"
+						/>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-secondary close-modal"
+					data-bs-dismiss="modal"
+				>
+					Close
+				</button>
+				<button
+					type="button"
+					class="btn btn-primary upload"
+					(click)="upload()"
+				>
+					Upload
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
