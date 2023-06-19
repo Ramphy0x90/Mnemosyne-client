@@ -1,1 +1,33 @@
-<p>test works!</p>
+<div class="dev-test-container page-main-container">
+	<div class="user-section">
+		<h3>User data</h3>
+		<ol class="list-group list-group-numbered">
+			<li
+				class="list-group-item d-flex justify-content-between align-items-start"
+			>
+				<div class="ms-2 me-auto">
+					<div class="fw-bold">Username</div>
+					{{ userData?.username }}
+				</div>
+			</li>
+			<li
+				class="list-group-item d-flex justify-content-between align-items-start"
+			>
+				<div class="ms-2 me-auto">
+					<div class="fw-bold">Authorities</div>
+					{{ userData?.authorities | json }}
+				</div>
+			</li>
+		</ol>
+	</div>
+
+	<div class="user-section">
+		<h3>Style</h3>
+		<ol class="list-group list-group-numbered"></ol>
+	</div>
+
+	<div class="user-section">
+		<h3>APIs</h3>
+		<ol class="list-group list-group-numbered"></ol>
+	</div>
+</div>
