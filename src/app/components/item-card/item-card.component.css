@@ -1,14 +1,11 @@
-.item-card-main-container {
-	padding: var(--space-8) var(--space-6);
-}
-
 .body {
 	position: relative;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	gap: var(--space-6);
 	align-items: center;
-	padding: var(--space-6) var(--space-4);
-	border-radius: var(--radio-1);
+	padding: var(--space-2) var(--space-6);
+	border-bottom: 1px solid var(--main-dark-secondary);
 }
 
 .body:hover {
@@ -16,16 +13,9 @@
 	background-color: var(--main-light-1);
 }
 
-.check {
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin: var(--space-4) var(--space-5);
-}
-
 .img-container i {
 	color: var(--main-color);
-	font-size: 40px;
+	font-size: 25px;
 }
 
 .title-container {
@@ -34,4 +24,45 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.body {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: var(--space-6) var(--space-4);
+		border-radius: var(--radio-1);
+		border: none;
+	}
+
+	.img-container i {
+		color: var(--main-color);
+		font-size: 40px;
+	}
+
+	.check {
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: var(--space-4) var(--space-5);
+	}
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
 }

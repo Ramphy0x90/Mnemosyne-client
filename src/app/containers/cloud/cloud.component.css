@@ -11,6 +11,7 @@
 }
 
 .file-metadata-container {
+	display: none;
 	flex: 0 0 350px;
 	padding: var(--space-7);
 	border-left: 1px solid var(--main-color);
@@ -35,6 +36,37 @@
 }
 
 .files-grid {
-	display: grid;
-	grid-template-columns: repeat(10, minmax(100px, 1fr));
+	display: flex;
+	flex-direction: column;
+	padding: var(--space-5);
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.file-metadata-container {
+		display: inherit;
+	}
+
+	.files-grid {
+		display: grid;
+		grid-template-columns: repeat(10, minmax(100px, 1fr));
+		gap: var(--space-5);
+		padding: var(--space-7) var(--space-6);
+	}
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
 }
