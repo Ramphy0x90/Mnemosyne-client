@@ -7,6 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { TestComponent } from "./dev/test/test.component";
 import { CloudComponent } from "./cloud/cloud.component";
 import { ComponentsModule } from "../components/components.module";
+import { PipesModule } from "../pipes/pipes.module";
 
 @NgModule({
 	declarations: [
@@ -15,6 +16,12 @@ import { ComponentsModule } from "../components/components.module";
 		TestComponent,
 		CloudComponent,
 	],
-	imports: [CommonModule, RouterModule, FormsModule, ComponentsModule],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		ComponentsModule,
+		PipesModule,
+	],
 })
 export class ContainersModule {}

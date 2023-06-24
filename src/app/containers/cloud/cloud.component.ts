@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CloudMenuAction } from "src/app/constants";
+import { FileInfo } from "src/app/models/cloud/file-info";
 import { FileService } from "src/app/services/file.service";
 
 @Component({
@@ -8,7 +9,8 @@ import { FileService } from "src/app/services/file.service";
 	styleUrls: ["./cloud.component.css"],
 })
 export class CloudComponent implements OnInit {
-	files: any[] = [];
+	files: FileInfo[] = [];
+	filesSize: number = 0;
 	selectedFiles: Set<any> = new Set();
 	showFileSelectors: boolean = false;
 
@@ -36,8 +38,8 @@ export class CloudComponent implements OnInit {
 	fetchFiles(): void {
 		this.fileService.getFiles().subscribe({
 			next: (data) => {
-				this.files = data;
-				console.log(data);
+				this.files = data.files;
+				this.filesSize = data.size;
 			},
 		});
 	}

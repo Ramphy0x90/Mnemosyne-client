@@ -24,6 +24,33 @@
 	</div>
 
 	<div class="file-metadata-container">
-		<div class="body"></div>
+		<div class="body">
+			<div class="slot slot-info-space">
+				<div class="slot-value">
+					<span class="slot-title">Used space</span>
+					<span>{{ filesSize | tspace : true }}</span>
+				</div>
+
+				<div class="progress">
+					<div
+						class="progress-bar"
+						role="progressbar"
+						[ngStyle]="{
+							width: (filesSize | tspace : false) + '%'
+						}"
+						[attr.aria-valuenow]="filesSize | tspace : false"
+						aria-valuemin="0"
+						aria-valuemax="100"
+					></div>
+				</div>
+			</div>
+
+			<div class="slot slot-info-files">
+				<div class="slot-value">
+					<span class="slot-title">Total files</span>
+					<span>{{ files.length }}</span>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

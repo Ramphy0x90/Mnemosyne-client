@@ -12,18 +12,47 @@
 
 .file-metadata-container {
 	display: none;
-	flex: 0 0 350px;
+	flex: 0 0 325px;
 	padding: var(--space-7);
 	border-left: 1px solid var(--main-color);
 }
 
 .body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-6);
 	width: 100%;
 	height: 100%;
+	padding: var(--space-7) var(--space-6);
 	background-color: var(--main-light);
 	border-radius: var(--radio-1);
 	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
+}
+
+.file-metadata-container .slot {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-3);
+	padding: var(--space-4);
+}
+
+.file-metadata-container .slot-value {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.file-metadata-container .slot .progress {
+	height: 6px;
+}
+
+.file-metadata-container .slot .progress-bar {
+	background-color: var(--main-color);
+}
+
+.file-metadata-container .slot-title {
+	font-weight: bold;
 }
 
 .message {
@@ -57,7 +86,7 @@
 
 	.files-grid {
 		display: grid;
-		grid-template-columns: repeat(10, minmax(100px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 		gap: var(--space-5);
 		padding: var(--space-7) var(--space-6);
 	}
@@ -65,6 +94,9 @@
 
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+	.file-metadata-container {
+		flex: 0 0 350px;
+	}
 }
 
 /* XX-Large devices (larger desktops, 1400px and up) */
