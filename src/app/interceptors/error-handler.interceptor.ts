@@ -25,11 +25,12 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 					msg = `${error.statusText}`;
 				} else if (error.error.message != undefined) {
 					msg = `${error.error.message}`;
+				} else if (error.error != undefined) {
+					msg = msg = `${error.error}`;
 				} else {
 					msg = msg = `${error.error.error}`;
 				}
 
-				console.log(error);
 				this.toastr.error(msg);
 				return throwError(() => msg);
 			})

@@ -22,7 +22,9 @@ export enum NavOption {
 
 export enum CloudMenuAction {
 	UPLOAD,
+	EDIT,
 	CREATE,
 	DELETE,
 	SORT,
+	CANCEL,
 }

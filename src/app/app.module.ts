@@ -11,6 +11,8 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { ToastrModule } from "ngx-toastr";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { ErrorHandlerInterceptor } from "./interceptors/error-handler.interceptor";
+import { StoreModule } from "@ngrx/store";
+import { userReducer } from "./store/user/user.reducer";
 
 @NgModule({
 	declarations: [AppComponent],
@@ -32,6 +34,12 @@ import { ErrorHandlerInterceptor } from "./interceptors/error-handler.intercepto
 			preventDuplicates: true,
 			progressBar: true,
 		}),
+		StoreModule.forRoot(
+			{
+				user: userReducer,
+			},
+			{}
+		),
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

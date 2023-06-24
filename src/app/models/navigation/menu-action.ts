@@ -5,4 +5,5 @@ export interface MenuAction {
 	name: string;
 	icon?: string;
 	action: Function;
+	type?: string;
 }

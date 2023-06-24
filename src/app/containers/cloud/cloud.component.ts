@@ -48,7 +48,5 @@ export class CloudComponent implements OnInit {
 		} else {
 			this.selectedFiles.delete(file.name);
 		}
-
-		console.log(this.selectedFiles);
 	}
 }
