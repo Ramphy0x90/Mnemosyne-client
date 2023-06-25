@@ -26,7 +26,9 @@ export class FileService {
 	}
 
 	getFile(id: string): Observable<any> {
-		return this.httpClient.get(`${environment.server}/file/${id}`);
+		return this.httpClient.get(`${environment.server}/file/${id}`, {
+			responseType: "blob",
+		});
 	}
 
 	getFiles(): Observable<any> {

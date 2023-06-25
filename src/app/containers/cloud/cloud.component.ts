@@ -11,7 +11,8 @@ import { FileService } from "src/app/services/file.service";
 export class CloudComponent implements OnInit {
 	files: FileInfo[] = [];
 	filesSize: number = 0;
-	selectedFiles: Set<any> = new Set();
+	fileOnFocus?: FileInfo;
+	selectedFiles: Set<string> = new Set();
 	showFileSelectors: boolean = false;
 
 	constructor(private fileService: FileService) {}
@@ -44,7 +45,23 @@ export class CloudComponent implements OnInit {
 		});
 	}
 
-	selectFile(isSelected: boolean, file: any): void {
+	clickedFile(file: FileInfo): void {
+		this.fileOnFocus = file;
+		this.fileService
+			.getFile(this.fileOnFocus?.name)
+			.subscribe((file: Blob) => {
+				const blob = new Blob([file], { type: file.type.toString() });
+				const url = window.URL.createObjectURL(blob);
+				const imgContainer: HTMLElement | null =
+					document.querySelector(".slot-img");
+				imgContainer?.style.setProperty(
+					"background-image",
+					`url(${url})`
+				);
+			});
+	}
+
+	selectFile(isSelected: boolean, file: FileInfo): void {
 		if (isSelected) {
 			this.selectedFiles.add(file.name);
 		} else {
