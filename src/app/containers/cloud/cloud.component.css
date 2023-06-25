@@ -12,7 +12,7 @@
 
 .file-metadata-container {
 	display: none;
-	flex: 0 0 325px;
+	width: 325px;
 	padding: var(--space-7);
 	border-left: 1px solid var(--main-color);
 }
@@ -34,17 +34,40 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-3);
-	padding: var(--space-4);
+	padding: var(--space-5) var(--space-6);
+	background-color: var(--main-light-1);
+	border-radius: var(--radio-1);
 }
 
-.file-metadata-container .slot-value {
+.file-metadata-container .slot-row {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
 
+.file-metadata-container .slot-row .slot-img {
+	width: 100%;
+	height: 250px;
+	background-size: cover;
+}
+
+.file-metadata-container .slot-row .slot-title {
+	flex: 0 0 35%;
+	width: 100%;
+}
+
+.file-metadata-container .slot-row .slot-value {
+	flex: 0 0 65%;
+	width: 100%;
+	text-overflow: ellipsis;
+	text-align: right;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
 .file-metadata-container .slot .progress {
 	height: 6px;
+	background-color: var(--main-light);
 }
 
 .file-metadata-container .slot .progress-bar {
@@ -88,14 +111,14 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 		gap: var(--space-5);
-		padding: var(--space-7) var(--space-6);
+		padding: var(--space-5);
 	}
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 	.file-metadata-container {
-		flex: 0 0 350px;
+		width: 350px;
 	}
 }
 

@@ -16,6 +16,7 @@
 							[title]="file.name"
 							[showSelector]="showFileSelectors"
 							(selected)="selectFile($event, file)"
+							(click)="clickedFile(file)"
 						></app-item-card>
 					</ng-container>
 				</div>
@@ -26,9 +27,11 @@
 	<div class="file-metadata-container">
 		<div class="body">
 			<div class="slot slot-info-space">
-				<div class="slot-value">
+				<div class="slot-row">
 					<span class="slot-title">Used space</span>
-					<span>{{ filesSize | tspace : true }}</span>
+					<span class="slot-value">{{
+						filesSize | tspace : true
+					}}</span>
 				</div>
 
 				<div class="progress">
@@ -46,9 +49,32 @@
 			</div>
 
 			<div class="slot slot-info-files">
-				<div class="slot-value">
+				<div class="slot-row">
 					<span class="slot-title">Total files</span>
-					<span>{{ files.length }}</span>
+					<span class="slot-value">{{ files.length }}</span>
+				</div>
+			</div>
+
+			<div class="slot slot-info-file" *ngIf="fileOnFocus">
+				<div class="slot-row">
+					<div class="slot-img"></div>
+				</div>
+
+				<div class="slot-row">
+					<span class="slot-title">Name</span>
+					<span class="slot-value">{{ fileOnFocus.name }}</span>
+				</div>
+
+				<div class="slot-row">
+					<span class="slot-title">Type</span>
+					<span class="slot-value">{{ fileOnFocus.ext }}</span>
+				</div>
+
+				<div class="slot-row">
+					<span class="slot-title">Size</span>
+					<span class="slot-value">{{
+						fileOnFocus.size | tspace : true
+					}}</span>
 				</div>
 			</div>
 		</div>
