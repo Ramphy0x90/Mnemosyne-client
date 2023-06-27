@@ -22,13 +22,13 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 				let msg: string;
 
 				if (!error.ok && error.status == 0) {
-					msg = `${error.statusText}`;
-				} else if (error.error.message != undefined) {
+					msg = "Server down :(";
+				} else if (error.error.error) {
+					msg = `${error.error.error}`;
+				} else if (error.error.message) {
 					msg = `${error.error.message}`;
-				} else if (error.error != undefined) {
-					msg = msg = `${error.error}`;
 				} else {
-					msg = msg = `${error.error.error}`;
+					msg = "Unknown error";
 				}
 
 				this.toastr.error(msg);
