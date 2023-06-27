@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -33,5 +33,17 @@ export class FileService {
 
 	getFiles(): Observable<any> {
 		return this.httpClient.get(`${environment.server}/file/all`);
+	}
+
+	deleteFiles(filesIds: string[]): Observable<any> {
+		const options = {
+			headers: new HttpHeaders({ "Content-Type": "application/json" }),
+			body: { filesNames: filesIds },
+		};
+
+		return this.httpClient.delete(
+			`${environment.server}/file/delete`,
+			options
+		);
 	}
 }

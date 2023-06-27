@@ -1,4 +1,4 @@
-<div class="cloud-container page-main-container">
+<div #cloudContainer class="cloud-container page-main-container">
 	<div class="files-container">
 		<div class="body">
 			<app-actions-menu (event)="eventHandler($event)"></app-actions-menu>
@@ -16,7 +16,6 @@
 							[title]="file.name"
 							[showSelector]="showFileSelectors"
 							(selected)="selectFile($event, file)"
-							(click)="clickedFile(file)"
 						></app-item-card>
 					</ng-container>
 				</div>
@@ -55,8 +54,25 @@
 				</div>
 			</div>
 
+			<div
+				class="slot slot-chart"
+				*ngIf="!showFileSelectors && !fileOnFocus"
+			>
+				<ngx-charts-pie-chart
+					[results]="dataPC"
+					[view]="viewPC"
+					[animations]="animationPC"
+					[scheme]="colorSchemePC"
+					[labels]="labelsPC"
+					[legend]="true"
+					[legendTitle]="''"
+					[legendPosition]="legendPosition"
+					[explodeSlices]="explodeSlices"
+				></ngx-charts-pie-chart>
+			</div>
+
 			<div class="slot slot-info-file" *ngIf="fileOnFocus">
-				<div class="slot-row">
+				<div class="slot-row image">
 					<div class="slot-img"></div>
 				</div>
 
@@ -75,6 +91,34 @@
 					<span class="slot-value">{{
 						fileOnFocus.size | tspace : true
 					}}</span>
+				</div>
+
+				<div class="slot-row">
+					<span class="slot-title"
+						><i class="bi bi-cloud-download"></i
+					></span>
+					<a class="slot-download">Download</a>
+				</div>
+			</div>
+
+			<div class="slot slot-info-files" *ngIf="showFileSelectors">
+				<div class="slot-row">
+					<span class="slot-title"># Files</span>
+					<span class="slot-value">{{ selectedFiles.size }}</span>
+				</div>
+
+				<div class="slot-row">
+					<span class="slot-title">Size</span>
+					<span class="slot-value">{{
+						getSizeSelectedFiles() | tspace : true
+					}}</span>
+				</div>
+
+				<div class="slot-row">
+					<span class="slot-title"
+						><i class="bi bi-cloud-download"></i
+					></span>
+					<a class="slot-download">Download</a>
 				</div>
 			</div>
 		</div>
