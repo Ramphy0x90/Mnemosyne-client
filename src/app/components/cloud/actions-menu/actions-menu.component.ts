@@ -16,25 +16,37 @@ import { FileService } from "src/app/services/file.service";
 	styleUrls: ["./actions-menu.component.css"],
 })
 export class ActionsMenuComponent {
-	@ViewChild("uploadModal") uploadModal?: ElementRef;
+	@ViewChild("modal") modal?: ElementRef;
 	@Output() event = new EventEmitter<CloudMenuAction>();
 
 	CloudMenuAction = CloudMenuAction;
+	lastAction?: MenuAction;
 	onEdit: boolean = false;
+	showActionsNames: boolean = false;
 
 	navOptions: MenuAction[] = [
 		{
 			id: CloudMenuAction.UPLOAD,
-			name: "Upload",
-			icon: "bi bi-cloud-arrow-up",
+			name: "Upload file",
+			icon: "bi bi-cloud-upload",
 			type: "button",
-			action: () => {},
+			showOnEdit: false,
+			action: null,
+		},
+		{
+			id: CloudMenuAction.CREATE,
+			name: "Create folder",
+			icon: "bi bi-folder-plus",
+			type: "action",
+			showOnEdit: false,
+			action: null,
 		},
 		{
 			id: CloudMenuAction.EDIT,
 			name: "Edit",
 			icon: "bi bi-pencil-square",
 			type: "action",
+			showOnEdit: false,
 			action: () => {
 				this.onEdit = true;
 				this.event.emit(CloudMenuAction.EDIT);
@@ -45,6 +57,7 @@ export class ActionsMenuComponent {
 			name: "Delete",
 			icon: "bi bi-trash3",
 			type: "action",
+			showOnEdit: true,
 			action: () => {
 				this.onEdit = false;
 				this.event.emit(CloudMenuAction.DELETE);
@@ -53,8 +66,9 @@ export class ActionsMenuComponent {
 		{
 			id: CloudMenuAction.CANCEL,
 			name: "Cancel",
-			icon: "bi bi-x",
+			icon: "bi bi-x-square",
 			type: "action",
+			showOnEdit: true,
 			action: () => {
 				this.onEdit = false;
 				this.event.emit(CloudMenuAction.CANCEL);
@@ -85,7 +99,6 @@ export class ActionsMenuComponent {
 					this.onUpload = true;
 					this.fileService.upload(file).subscribe({
 						next: (event) => {
-							console.log(event);
 							if (event.type === HttpEventType.UploadProgress) {
 								this.uploadProgress = Math.round(
 									(100 * event.loaded) / (event.total || 1)
@@ -94,13 +107,13 @@ export class ActionsMenuComponent {
 								this.requestMessage = event.message;
 							}
 
-							if (this.uploadModal) {
+							if (this.modal) {
 								const modalInput =
-									this.uploadModal.nativeElement.querySelector(
+									this.modal.nativeElement.querySelector(
 										"input[type='file']"
 									);
 								const modalCloseButton =
-									this.uploadModal.nativeElement.querySelector(
+									this.modal.nativeElement.querySelector(
 										"button.close-modal"
 									);
 
@@ -120,5 +133,11 @@ export class ActionsMenuComponent {
 			this.onUpload = false;
 			this.selectedFiles = undefined;
 		}
+	}
+
+	createFolder(folder: string): void {}
+
+	selectAction(action: MenuAction): void {
+		this.lastAction = action;
 	}
 }

@@ -1,34 +1,22 @@
 <div class="actions-menu-main-container">
 	<ng-container *ngFor="let action of navOptions">
-		<button
-			*ngIf="action.id == CloudMenuAction.UPLOAD && !onEdit"
-			class="action-button"
-			data-bs-toggle="modal"
-			data-bs-target="#uploadModal"
-		>
-			<i [ngClass]="action.icon"></i> {{ action.name }}
-		</button>
-
 		<a
-			*ngIf="
-				(action.id != CloudMenuAction.UPLOAD &&
-					action.id == CloudMenuAction.EDIT &&
-					!onEdit) ||
-				(action.id == CloudMenuAction.DELETE && onEdit) ||
-				(action.id == CloudMenuAction.CANCEL && onEdit)
-			"
+			*ngIf="onEdit ? onEdit && action.showOnEdit : !action.showOnEdit"
 			class="action-button"
-			(click)="action.action()"
+			[attr.data-bs-toggle]="!action.action ? 'modal' : ''"
+			[attr.data-bs-target]="!action.action ? '#modal' : ''"
+			(click)="selectAction(action); action.action && action.action()"
 		>
-			<i [ngClass]="action.icon"></i> {{ action.name }}
+			<i [ngClass]="action.icon"></i>
+			<span *ngIf="showActionsNames">{{ action.name }}</span>
 		</a>
 	</ng-container>
 </div>
 
 <div
-	#uploadModal
+	#modal
 	class="modal fade"
-	id="uploadModal"
+	id="modal"
 	tabindex="-1"
 	aria-labelledby="uploadModalLabel"
 	aria-hidden="true"
@@ -36,7 +24,9 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="uploadModalLabel">Upload file</h5>
+				<h5 class="modal-title" id="uploadModalLabel">
+					{{ lastAction?.name }}
+				</h5>
 				<button
 					type="button"
 					class="btn-close"
@@ -48,9 +38,18 @@
 				<form>
 					<div class="form-group">
 						<input
+							*ngIf="lastAction?.id == CloudMenuAction.UPLOAD"
 							type="file"
 							class="form-control"
 							id="file"
+							(change)="onFileSelected($event)"
+						/>
+
+						<input
+							*ngIf="lastAction?.id == CloudMenuAction.CREATE"
+							type="text"
+							class="form-control"
+							id="folder"
 							(change)="onFileSelected($event)"
 						/>
 					</div>
@@ -69,7 +68,7 @@
 					class="btn btn-primary upload"
 					(click)="upload()"
 				>
-					Upload
+					Save
 				</button>
 			</div>
 		</div>

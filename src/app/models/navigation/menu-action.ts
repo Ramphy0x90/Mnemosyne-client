@@ -4,6 +4,7 @@ export interface MenuAction {
 	id: CloudMenuAction;
 	name: string;
 	icon?: string;
-	action: Function;
+	action: Function | null;
 	type?: string;
+	showOnEdit: boolean;
 }
