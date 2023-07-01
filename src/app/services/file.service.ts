@@ -25,6 +25,18 @@ export class FileService {
 		return upload;
 	}
 
+	create(name: String): Observable<any> {
+		const folder = {
+			name: name,
+			basePath: "/",
+		};
+
+		return this.httpClient.post(
+			`${environment.server}/file/create`,
+			folder
+		);
+	}
+
 	getFile(id: string): Observable<any> {
 		return this.httpClient.get(`${environment.server}/file/${id}`, {
 			responseType: "blob",
