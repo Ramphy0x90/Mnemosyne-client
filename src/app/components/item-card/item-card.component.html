@@ -6,8 +6,12 @@
 			class="bi bi-check-circle-fill check"
 		></i>
 		<div class="img-container">
-			<i [ngClass]="'bi bi-filetype-' + img"></i>
+			<i
+				*ngIf="file?.isFile"
+				[ngClass]="'bi bi-filetype-' + file?.ext"
+			></i>
+			<i *ngIf="!file?.isFile" class="bi bi-folder-fill text-warning"></i>
 		</div>
-		<div class="title-container">{{ title }}</div>
+		<div class="title-container">{{ file?.name }}</div>
 	</div>
 </div>

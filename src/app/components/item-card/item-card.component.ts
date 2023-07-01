@@ -6,6 +6,7 @@ import {
 	Output,
 	SimpleChanges,
 } from "@angular/core";
+import { FileInfo } from "src/app/models/cloud/file-info";
 
 @Component({
 	selector: "app-item-card",
@@ -13,8 +14,7 @@ import {
 	styleUrls: ["./item-card.component.css"],
 })
 export class ItemCardComponent implements OnChanges {
-	@Input() img?: string;
-	@Input() title?: string;
+	@Input() file?: FileInfo;
 	@Input() showSelector: boolean = false;
 
 	@Output() selected = new EventEmitter<boolean>();

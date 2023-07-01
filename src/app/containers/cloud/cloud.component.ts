@@ -63,6 +63,7 @@ export class CloudComponent implements OnInit, AfterViewInit {
 	eventHandler(event: CloudMenuAction): void {
 		switch (event) {
 			case CloudMenuAction.UPLOAD:
+			case CloudMenuAction.CREATE:
 				this.fetchFiles();
 				break;
 			case CloudMenuAction.EDIT:
@@ -84,7 +85,7 @@ export class CloudComponent implements OnInit, AfterViewInit {
 	fetchFiles(): void {
 		this.fileService.getFiles().subscribe({
 			next: (data) => {
-				this.files = data.files;
+				this.files = _.orderBy(data.files, (file) => file.isFile);
 				this.filesSize = data.size;
 
 				let categoryCount = _.countBy(this.files, (file) => file.ext);

@@ -45,14 +45,20 @@
 	justify-content: space-between;
 }
 
+.file-metadata-container .slot-row.image {
+	justify-content: center;
+	padding: var(--space-6);
+}
+
 .file-metadata-container .slot-row .slot-img {
-	width: 100%;
-	height: 250px;
+	width: 250px;
+	height: 225px;
 	background-size: cover;
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
 .file-metadata-container .slot-row .slot-title {
-	flex: 0 0 35%;
+	flex: 1 0 35%;
 	width: 100%;
 }
 
@@ -76,6 +82,20 @@
 
 .file-metadata-container .slot-title {
 	font-weight: bold;
+}
+
+::ng-deep .slot-chart .chart-legend {
+	display: inherit;
+}
+
+::ng-deep .slot-chart .chart-legend .legend-labels {
+	width: 250px !important;
+	max-width: none;
+	color: var(--main-color) !important;
+}
+
+::ng-deep .slot-chart .chart-legend .legend-label {
+	color: var(--main-color) !important;
 }
 
 .message {

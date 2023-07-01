@@ -12,8 +12,7 @@
 				<div class="files-grid">
 					<ng-container *ngFor="let file of files">
 						<app-item-card
-							[img]="file.ext"
-							[title]="file.name"
+							[file]="file"
 							[showSelector]="showFileSelectors"
 							(selected)="selectFile($event, file)"
 						></app-item-card>
