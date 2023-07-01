@@ -3,8 +3,8 @@
 		<a
 			*ngIf="onEdit ? onEdit && action.showOnEdit : !action.showOnEdit"
 			class="action-button"
-			[attr.data-bs-toggle]="!action.action ? 'modal' : ''"
-			[attr.data-bs-target]="!action.action ? '#modal' : ''"
+			[attr.data-bs-toggle]="action.usesModal ? 'modal' : ''"
+			[attr.data-bs-target]="action.usesModal ? '#modal' : ''"
 			(click)="selectAction(action); action.action && action.action()"
 		>
 			<i [ngClass]="action.icon"></i>
@@ -50,7 +50,8 @@
 							type="text"
 							class="form-control"
 							id="folder"
-							(change)="onFileSelected($event)"
+							name="foldderName"
+							[(ngModel)]="createFolderName"
 						/>
 					</div>
 				</form>
@@ -66,7 +67,7 @@
 				<button
 					type="button"
 					class="btn btn-primary upload"
-					(click)="upload()"
+					(click)="submit()"
 				>
 					Save
 				</button>

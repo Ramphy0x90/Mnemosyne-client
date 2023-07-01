@@ -20,9 +20,8 @@ export class ActionsMenuComponent {
 	@Output() event = new EventEmitter<CloudMenuAction>();
 
 	CloudMenuAction = CloudMenuAction;
-	lastAction?: MenuAction;
-	onEdit: boolean = false;
 	showActionsNames: boolean = false;
+	lastAction?: MenuAction;
 
 	navOptions: MenuAction[] = [
 		{
@@ -31,7 +30,8 @@ export class ActionsMenuComponent {
 			icon: "bi bi-cloud-upload",
 			type: "button",
 			showOnEdit: false,
-			action: null,
+			usesModal: true,
+			action: () => this.upload(),
 		},
 		{
 			id: CloudMenuAction.CREATE,
@@ -39,7 +39,8 @@ export class ActionsMenuComponent {
 			icon: "bi bi-folder-plus",
 			type: "action",
 			showOnEdit: false,
-			action: null,
+			usesModal: true,
+			action: () => this.createFolder(),
 		},
 		{
 			id: CloudMenuAction.EDIT,
@@ -47,6 +48,7 @@ export class ActionsMenuComponent {
 			icon: "bi bi-pencil-square",
 			type: "action",
 			showOnEdit: false,
+			usesModal: false,
 			action: () => {
 				this.onEdit = true;
 				this.event.emit(CloudMenuAction.EDIT);
@@ -58,6 +60,7 @@ export class ActionsMenuComponent {
 			icon: "bi bi-trash3",
 			type: "action",
 			showOnEdit: true,
+			usesModal: false,
 			action: () => {
 				this.onEdit = false;
 				this.event.emit(CloudMenuAction.DELETE);
@@ -69,6 +72,7 @@ export class ActionsMenuComponent {
 			icon: "bi bi-x-square",
 			type: "action",
 			showOnEdit: true,
+			usesModal: false,
 			action: () => {
 				this.onEdit = false;
 				this.event.emit(CloudMenuAction.CANCEL);
@@ -76,10 +80,13 @@ export class ActionsMenuComponent {
 		},
 	];
 
-	uploadProgress: number = 0;
+	onEdit: boolean = false;
 	onUpload: boolean = false;
+	uploadProgress: number = 0;
+
 	selectedFiles?: FileList;
-	fileInfos: object[] = [];
+	createFolderName?: string;
+
 	requestMessage?: string;
 
 	constructor(private fileService: FileService) {}
@@ -135,9 +142,26 @@ export class ActionsMenuComponent {
 		}
 	}
 
-	createFolder(folder: string): void {}
+	createFolder(): void {
+		if (this.createFolderName) {
+			this.fileService.create(this.createFolderName).subscribe(() => {
+				const modalCloseButton =
+					this.modal?.nativeElement.querySelector(
+						"button.close-modal"
+					);
+
+				this.createFolderName = undefined;
+				modalCloseButton.click();
+				this.event.emit(CloudMenuAction.CREATE);
+			});
+		}
+	}
 
 	selectAction(action: MenuAction): void {
 		this.lastAction = action;
+	}
+
+	submit(): void {
+		this.lastAction?.action && this.lastAction.action();
 	}
 }
