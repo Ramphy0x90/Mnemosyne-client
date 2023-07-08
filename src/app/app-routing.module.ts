@@ -11,7 +11,12 @@ const routes: Routes = [
 	{ path: "", pathMatch: "full", redirectTo: "home" },
 	{ path: "log-in", component: LogInComponent },
 	{ path: "sign-up", component: SignUpComponent },
-	{ path: "cloud", component: CloudComponent, canActivate: [AuthGuard] },
+	{ path: "cloud", redirectTo: "cloud/" },
+	{
+		path: "cloud/:path",
+		component: CloudComponent,
+		canActivate: [AuthGuard],
+	},
 	{
 		path: "dev",
 		canActivate: [AuthAdminGuard],
