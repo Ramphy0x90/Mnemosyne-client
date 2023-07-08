@@ -6,6 +6,7 @@ import {
 	ViewChild,
 	EventEmitter,
 } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { CloudMenuAction } from "src/app/constants";
 import { MenuAction } from "src/app/models/navigation/menu-action";
 import { FileService } from "src/app/services/file.service";
@@ -89,13 +90,17 @@ export class ActionsMenuComponent {
 
 	requestMessage?: string;
 
-	constructor(private fileService: FileService) {}
+	constructor(
+		private fileService: FileService,
+		private route: ActivatedRoute
+	) {}
 
 	onFileSelected(event: any): void {
 		this.selectedFiles = event.target.files;
 	}
 
 	upload(): void {
+		const currentPath = this.route.snapshot.paramMap.get("path") || "/";
 		this.uploadProgress = 0;
 
 		if (this.selectedFiles) {
@@ -104,7 +109,7 @@ export class ActionsMenuComponent {
 
 				if (file) {
 					this.onUpload = true;
-					this.fileService.upload(file).subscribe({
+					this.fileService.upload(currentPath, file).subscribe({
 						next: (event) => {
 							if (event.type === HttpEventType.UploadProgress) {
 								this.uploadProgress = Math.round(
@@ -144,16 +149,20 @@ export class ActionsMenuComponent {
 
 	createFolder(): void {
 		if (this.createFolderName) {
-			this.fileService.create(this.createFolderName).subscribe(() => {
-				const modalCloseButton =
-					this.modal?.nativeElement.querySelector(
-						"button.close-modal"
-					);
+			const currentPath = this.route.snapshot.paramMap.get("path") || "/";
 
-				this.createFolderName = undefined;
-				modalCloseButton.click();
-				this.event.emit(CloudMenuAction.CREATE);
-			});
+			this.fileService
+				.create(currentPath, this.createFolderName)
+				.subscribe(() => {
+					const modalCloseButton =
+						this.modal?.nativeElement.querySelector(
+							"button.close-modal"
+						);
+
+					this.createFolderName = undefined;
+					modalCloseButton.click();
+					this.event.emit(CloudMenuAction.CREATE);
+				});
 		}
 	}
 

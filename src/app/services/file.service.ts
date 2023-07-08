@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -9,8 +9,9 @@ import { environment } from "src/environments/environment";
 export class FileService {
 	constructor(private httpClient: HttpClient) {}
 
-	upload(file: File): Observable<any> {
+	upload(path: string, file: File): Observable<any> {
 		const fileForm = new FormData();
+		fileForm.append("path", path);
 		fileForm.append("file", file);
 
 		const upload = this.httpClient.post(
@@ -25,10 +26,10 @@ export class FileService {
 		return upload;
 	}
 
-	create(name: String): Observable<any> {
+	create(path: string, name: String): Observable<any> {
 		const folder = {
 			name: name,
-			basePath: "/",
+			basePath: path,
 		};
 
 		return this.httpClient.post(
@@ -43,8 +44,13 @@ export class FileService {
 		});
 	}
 
-	getFiles(): Observable<any> {
-		return this.httpClient.get(`${environment.server}/file/all`);
+	getFiles(path: string): Observable<any> {
+		let queryParams = new HttpParams();
+		queryParams = queryParams.append("path", path);
+
+		return this.httpClient.get(`${environment.server}/file/all`, {
+			params: queryParams,
+		});
 	}
 
 	deleteFiles(filesIds: string[]): Observable<any> {
